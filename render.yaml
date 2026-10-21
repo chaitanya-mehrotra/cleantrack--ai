@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cleantrack-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: UPLOAD_DIR
+        value: /app/uploads
+      - key: PORT
+        value: 8000
+      - key: SEED_DEMO_COMPLAINTS
+        value: "true"
