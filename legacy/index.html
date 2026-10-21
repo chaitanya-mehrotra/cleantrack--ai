@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!-- trigger redeploy -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CleanTrack AI – AI-powered garbage reporting and analysis for local communities. Report waste, get AI classification, and track cleanup progress." />
+  <title>CleanTrack AI – Community Waste Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== NAV ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand" id="nav-brand-link" role="button" tabindex="0">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/>
+          </svg>
+        </div>
+        <span class="brand-name">CleanTrack <span class="brand-ai">AI</span></span>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" id="nav-home" onclick="showPage('home')">Home</button>
+        <button class="nav-btn" id="nav-report" onclick="showPage('report')">Report</button>
+        <button class="nav-btn" id="nav-reports" onclick="showPage('reports')">Reports</button>
+      </div>
+      <div class="nav-badge" id="nav-badge">0 Reports</div>
+    </div>
+  </nav>
+
+  <!-- ========== PAGE: HOME ========== -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="hero-bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="pulse-dot"></span>
+          AI-Powered Community Intelligence
+        </div>
+        <h1 class="hero-title">
+          Smart Waste Reporting<br />
+          <span class="gradient-text">Powered by AI</span>
+        </h1>
+        <p class="hero-subtitle">
+          CleanTrack AI instantly classifies garbage reports, assigns priority levels,
+          and delivers real-time community insights — making clean cities a reality.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" id="btn-report-garbage" onclick="showPage('report')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            Report Garbage
+          </button>
+          <button class="btn btn-secondary" id="btn-view-reports" onclick="showPage('reports')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            View Reports
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Total Reports</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-high">0</div>
+            <div class="stat-label">High Priority</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-resolved">0</div>
+            <div class="stat-label">Resolved</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-card main-card">
+          <div class="visual-card-header">
+            <span class="vc-dot red"></span><span class="vc-dot yellow"></span><span class="vc-dot green"></span>
+            <span class="vc-title">AI Classification Engine</span>
+          </div>
+          <div class="ai-stream" id="ai-stream">
+            <div class="stream-line"><span class="stream-label">Input:</span> "plastic bottles overflowing bin"</div>
+            <div class="stream-line analyzing"><span class="stream-label">Analyzing...</span></div>
+            <div class="stream-line result"><span class="stream-label">Type:</span> <span class="tag tag-plastic">Plastic</span></div>
+            <div class="stream-line result"><span class="stream-label">Priority:</span> <span class="tag tag-high">🔴 High</span></div>
+            <div class="stream-line result"><span class="stream-label">Status:</span> <span class="tag tag-pending">Pending</span></div>
+            <div class="stream-line confidence"><span class="stream-label">Confidence:</span> 94%</div>
+          </div>
+        </div>
+        <div class="visual-card mini-card mini-1">
+          <div class="mini-icon">🗑️</div>
+          <div class="mini-text">Waste Classified</div>
+          <div class="mini-sub">+12 today</div>
+        </div>
+        <div class="visual-card mini-card mini-2">
+          <div class="mini-icon">⚡</div>
+          <div class="mini-text">Instant Analysis</div>
+          <div class="mini-sub">&lt; 1 second</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="features-section">
+      <h2 class="section-title">How CleanTrack AI Works</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(99,102,241,0.15); color: #818cf8;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3>Describe the Waste</h3>
+          <p>Type a description of the garbage you've spotted in your community.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(16,185,129,0.15); color: #34d399;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>AI Instant Analysis</h3>
+          <p>Our AI engine classifies waste type and assigns priority automatically.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(245,158,11,0.15); color: #fbbf24;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <h3>Community Insights</h3>
+          <p>View AI-generated insights on waste patterns and high-priority zones.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(239,68,68,0.15); color: #f87171;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Track Progress</h3>
+          <p>Follow each report through Submitted → In Progress → Resolved stages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE: REPORT ========== -->
+  <section class="page" id="page-report">
+    <div class="page-container">
+      <div class="page-header">
+        <h1 class="page-title">Report Garbage</h1>
+        <p class="page-subtitle">Fill in the details below. Our AI will automatically classify and prioritize your report.</p>
+      </div>
+      <div class="report-layout">
+        <div class="report-form-card">
+          <div class="form-group">
+            <label class="form-label" for="waste-description">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Describe the Waste
+            </label>
+            <textarea
+              class="form-textarea"
+              id="waste-description"
+              placeholder="e.g., 'Plastic bottles overflowing near the park entrance' or 'Large pile of food waste on Main Street'..."
+              rows="5"
+              oninput="liveAnalyze(this.value)"
+            ></textarea>
+            <div class="char-count" id="char-count">0 / 300 characters</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              Upload Image (Optional)
+            </label>
+            <div class="upload-zone" id="upload-zone" onclick="document.getElementById('img-input').click()">
+              <input type="file" id="img-input" accept="image/*" style="display:none" onchange="handleImageUpload(event)" />
+              <div class="upload-content" id="upload-content">
+                <div class="upload-icon">📸</div>
+                <div class="upload-text">Click to upload image</div>
+                <div class="upload-sub">JPG, PNG, GIF up to 10MB</div>
+              </div>
+              <img id="img-preview" class="img-preview" src="" alt="Preview" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Location (Optional)
+            </label>
+            <input type="text" class="form-input" id="waste-location" placeholder="e.g., Park Street, Block 4..." />
+          </div>
+
+          <button class="btn btn-primary btn-full" id="btn-analyze-submit" onclick="analyzeAndSubmit()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            Analyze &amp; Submit
+          </button>
+        </div>
+
+        <!-- Live AI Preview -->
+        <div class="ai-preview-panel">
+          <div class="panel-header">
+            <div class="panel-dot"></div>
+            AI Analysis Preview
+          </div>
+          <div class="preview-content" id="preview-content">
+            <div class="preview-empty">
+              <div class="preview-empty-icon">🤖</div>
+              <div>Start typing to see AI analysis...</div>
+            </div>
+          </div>
+
+          <!-- AI Tips -->
+          <div class="ai-tips">
+            <div class="tips-title">💡 Tips for better results</div>
+            <ul class="tips-list">
+              <li>Use keywords like <strong>plastic</strong>, <strong>bottle</strong>, <strong>can</strong> for type detection</li>
+              <li>Mention <strong>overflow</strong>, <strong>danger</strong>, <strong>large</strong> for high priority</li>
+              <li>Describe <strong>food</strong>, <strong>vegetable</strong> for organic waste</li>
+              <li>Use <strong>mobile</strong>, <strong>battery</strong>, <strong>charger</strong>, <strong>laptop</strong> for electronic waste</li>
+            </ul>
+          </div>
+
+          <!-- Status Flow -->
+          <div class="status-flow">
+            <div class="flow-title">Status Tracking</div>
+            <div class="flow-steps">
+              <div class="flow-step active">
+                <div class="flow-dot"></div>
+                <div class="flow-label">Submitted</div>
+              </div>
+              <div class="flow-connector"></div>
+              <div class="flow-step">
+                <div class="flow-dot"></div>
+                <div class="flow-label">In Progress</div>
+              </div>
+              <div class="flow-connector"></div>
+              <div class="flow-step">
+                <div class="flow-dot"></div>
+                <div class="flow-label">Escalated</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE: REPORTS ========== -->
+  <section class="page" id="page-reports">
+    <div class="page-container">
+      <div class="page-header">
+        <h1 class="page-title">All Reports</h1>
+        <p class="page-subtitle">All submitted garbage reports with AI classifications and current status.</p>
+      </div>
+
+      <!-- AI Insights -->
+      <div class="insights-section" id="insights-section">
+        <div class="insights-header">
+          <div class="insights-icon">🧠</div>
+          <div>
+            <div class="insights-title">AI Insights</div>
+            <div class="insights-sub">Powered by CleanTrack AI Engine</div>
+          </div>
+        </div>
+        <div class="insights-grid" id="insights-grid">
+          <div class="insight-card">
+            <div class="insight-label">Most Common Waste</div>
+            <div class="insight-value" id="insight-common">—</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">High Priority Issues</div>
+            <div class="insight-value danger" id="insight-high">0</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">Total Reports</div>
+            <div class="insight-value" id="insight-total">0</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">Pending Review</div>
+            <div class="insight-value warning" id="insight-pending">0</div>
+          </div>
+        </div>
+
+        <!-- Waste breakdown bar -->
+        <div class="waste-breakdown" id="waste-breakdown"></div>
+      </div>
+
+      <!-- Filters -->
+      <div class="reports-toolbar">
+        <div class="filter-group">
+          <button class="filter-btn active" id="filter-all" onclick="filterReports('all')">All</button>
+          <button class="filter-btn" id="filter-high" onclick="filterReports('high')">🔴 High</button>
+          <button class="filter-btn" id="filter-medium" onclick="filterReports('medium')">🟡 Medium</button>
+          <button class="filter-btn" id="filter-low" onclick="filterReports('low')">🟢 Low</button>
+        </div>
+        <button class="btn btn-danger-outline" id="btn-clear-reports" onclick="clearAllReports()">Clear All</button>
+      </div>
+
+      <!-- Reports List -->
+      <div class="reports-grid" id="reports-grid">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">📋</div>
+          <h3>No Reports Yet</h3>
+          <p>Submit your first garbage report to see it here.</p>
+          <button class="btn btn-primary" onclick="showPage('report')">Submit a Report</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SUCCESS TOAST ========== -->
+  <div class="toast" id="toast">
+    <div class="toast-icon">✅</div>
+    <div class="toast-text" id="toast-text">Report submitted successfully!</div>
+  </div>
+
+  <!-- ========== REPORT MODAL ========== -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
