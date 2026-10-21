@@ -10,7 +10,8 @@ import {
   WorkerTask
 } from '../types';
 
-const API_BASE = '/api';
+const BACKEND_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+const API_BASE = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
 
 function getAuthHeader(): Record<string, string> {
   const token = localStorage.getItem('cleantrack_token');
