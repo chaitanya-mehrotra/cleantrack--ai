@@ -7,13 +7,17 @@ if db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
 
 connect_args = {}
+engine_kwargs = {"echo": False}
+
 if db_url.startswith("sqlite"):
     connect_args["check_same_thread"] = False
+else:
+    engine_kwargs["pool_pre_ping"] = True
 
 engine = create_engine(
     db_url,
     connect_args=connect_args,
-    echo=False
+    **engine_kwargs
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
