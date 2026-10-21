@@ -1,5 +1,12 @@
 import os
+import sys
 from pathlib import Path
+
+# Ensure backend root directory is in sys.path
+BASE_BACKEND_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_BACKEND_DIR))
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -287,19 +294,32 @@ def health_check():
         "ai_classifier": "Multimodal Civic Taxonomy Active"
     }
 
-# Serve compiled frontend from dist/
-DIST_DIR = settings.UPLOAD_DIR.parent.parent / "dist"
-if (DIST_DIR / "assets").exists():
-    app.mount("/assets", StaticFiles(directory=str(DIST_DIR / "assets")), name="assets")
+# Root endpoint for health & deployment verification
+@app.get("/")
+def root_endpoint():
+    index_file = DIST_DIR / "index.html"
+    if index_file.exists() and index_file.is_file():
+        return FileResponse(index_file)
+    return {
+        "status": "healthy",
+        "service": settings.PROJECT_NAME,
+        "version": settings.VERSION,
+        "message": "CleanTrack AI 2.0 Backend is Running Successfully",
+        "documentation": "/docs",
+        "health_check": "/api/health"
+    }
 
-@app.get("/{full_path:path}")
-async def serve_spa(full_path: str):
-    # Exclude API and docs routes
-    if full_path.startswith("api") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
-        return {"error": "Endpoint not found"}
-        
-    file_path = DIST_DIR / full_path
-    if file_path.exists() and file_path.is_file():
-        return FileResponse(file_path)
-    return FileResponse(DIST_DIR / "index.html")
+# SPA fallback only if dist directory actually exists
+if DIST_DIR.exists() and (DIST_DIR / "index.html").exists():
+    if (DIST_DIR / "assets").exists():
+        app.mount("/assets", StaticFiles(directory=str(DIST_DIR / "assets")), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        if full_path.startswith("api") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
+            return {"error": "Endpoint not found"}
+        file_path = DIST_DIR / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(file_path)
+        return FileResponse(DIST_DIR / "index.html")
 
