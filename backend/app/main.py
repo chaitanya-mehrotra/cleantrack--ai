@@ -294,6 +294,9 @@ def health_check():
         "ai_classifier": "Multimodal Civic Taxonomy Active"
     }
 
+# Static frontend distribution path (if co-located)
+DIST_DIR = settings.UPLOAD_DIR.parent.parent / "dist"
+
 # Root endpoint for health & deployment verification
 @app.get("/")
 def root_endpoint():
