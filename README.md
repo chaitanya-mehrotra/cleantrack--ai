@@ -9,7 +9,17 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?logo=leaflet&logoColor=white)](https://leafletjs.com/)
+[![Backend Status](https://img.shields.io/badge/Backend-Live%20on%20Render-brightgreen?logo=render&logoColor=white)](https://cleantrack-backend-zfae.onrender.com/api/health)
+[![API Docs](https://img.shields.io/badge/API-Swagger%20Docs-blue?logo=fastapi&logoColor=white)](https://cleantrack-backend-zfae.onrender.com/docs)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+---
+
+## 🌐 Live Deployments
+
+* **Live Backend API**: [https://cleantrack-backend-zfae.onrender.com](https://cleantrack-backend-zfae.onrender.com)
+* **Interactive Swagger Docs**: [https://cleantrack-backend-zfae.onrender.com/docs](https://cleantrack-backend-zfae.onrender.com/docs)
+* **System Health Check**: [https://cleantrack-backend-zfae.onrender.com/api/health](https://cleantrack-backend-zfae.onrender.com/api/health)
 
 ---
 
